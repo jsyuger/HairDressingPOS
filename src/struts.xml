@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	<package name="test" extends="json-default">
+		<!-- test struts login -->
+		<action name="loginTest" class="org.jsyuger.web.test.LoginAction">
+			<result name="error">/test/testLogin.jsp</result>
+ 			<result name="success">/test/success.jsp</result>
+		</action>
+		<!--test json -->
+		<action name="testJson" class="org.jsyuger.web.test.TestJsonAction" method="testJson">
+			<!-- 配置类型的json的Result -->
+			<result type="json">
+				<!-- 为该Result指定参数 -->
+				<param name="noCache">true</param>
+				<param name="contentType">text/html</param>
+				<!-- 设置只序列Action的map属性
+				 param name="root">map</param -->
+			</result>
+		</action>  
+		
+		<!-- addPreOrder --> 
+		 <action name="addPreOrder" class="org.jsyuger.web.action.ProcessControllAction" method="addPreOrder">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action> 
+		<!-- removePreOrder -->
+		<action name="removePreOrder" class="org.jsyuger.web.action.ProcessControllAction" method="removePreOrder">
+			<result name="error">/login.jsp</result>
+ 			<result name="success">/workspace.jsp</result>
+		</action>
+		<!-- showInfo -->
+		<action name="showInfo" class="org.jsyuger.web.action.PaymentAction" method="countPaymentByName">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+	</package>
+	
+	<package name="top" extends="struts-default">
+		<!-- 控制台 -->
+ 		<action name="workspace" class="org.jsyuger.web.action.ProcessControllAction" method="show">
+			<result name="error">/login.jsp</result>
+ 			<result name="success">/workspace.jsp</result>
+		</action>
+		<!-- 染发下单 -->
+		<action name="dyeHairList" class="org.jsyuger.web.action.ServiceItemAction" method="showOneKind">
+ 			<result name="success">/dyeHairList.jsp</result>
+		</action>
+		<!-- 烫发下单 -->
+		<action name="permHairList" class="org.jsyuger.web.action.ServiceItemAction" method="showOneKind">
+ 			<result name="success">/permHairList.jsp</result>
+		</action>
+		<!-- 剪发下单 -->
+		<action name="protectHairList" class="org.jsyuger.web.action.ServiceItemAction" method="showOneKind">
+ 			<result name="success">/protectHairList.jsp</result>
+		</action>
+		<!-- 护发下单 -->
+		<action name="cutHairList" class="org.jsyuger.web.action.ServiceItemAction" method="showOneKind">
+ 			<result name="success">/cutHairList.jsp</result>
+		</action>
+ 	</package>
+	
+	<package name="search" extends="struts-default">
+		<!-- 颜色 -->
+		<action name="dyeHairColor" class="org.jsyuger.web.action.ServiceItemAction" method="showOneKindByColor">
+ 			<result name="success">/dyeHairList.jsp</result>
+		</action>
+		<!-- 类型 -->
+		<action name="dyeHairType" class="org.jsyuger.web.action.ServiceItemAction" method="showOneKindByType">
+ 			<result name="success">/dyeHairList.jsp</result>
+		</action>
+		<!-- 耗时 -->
+		<action name="dyeHairTimeConsuming" class="org.jsyuger.web.action.ServiceItemAction" method="showOneKindByTimeConsuming">
+ 			<result name="success">/dyeHairList.jsp</result>
+		</action>
+		<!-- 价格 -->
+		<action name="dyeHairPrice" class="org.jsyuger.web.action.ServiceItemAction" method="showOneKindByPrice">
+ 			<result name="success">/dyeHairList.jsp</result>
+		</action>
+ 	</package>
+	
+	<package name="struts" extends="struts-default">
+ 		<action name="login" class="org.jsyuger.web.action.UserAction" method="login">
+ 			<result name="error">/login.jsp</result>
+ 			<result name="success">/main.jsp</result>
+ 		</action>
+ 		
+ 		<!-- 用户记录 -->
+ 		<action name="customerRecord" class="org.jsyuger.web.action.CustomerAction" method="showByPage">
+ 			<result name="error">/login.jsp</result>
+ 			<result name="success">/consumer/customerRecord.jsp</result>
+ 		</action>
+ 		<action name="customerRecordPage" class="org.jsyuger.web.action.CustomerAction" method="showByPageChange">
+			<result name="error">/login.jsp</result>
+ 			<result name="success">/consumer/customerRecord.jsp</result>
+		</action>
+		
+		<!-- =================服务推荐=================== -->
+		<!-- 显示服务推荐 -->
+		<action name="recommendService" class="org.jsyuger.web.action.ServiceRecommendAction" method="showall">
+			<result name="error">/login.jsp</result>
+ 			<result name="success">/product/recommend.jsp</result>
+		</action>
+		<!-- 添加服务推荐 -->
+		<action name="addRecommend" class="org.jsyuger.web.action.ServiceRecommendAction" method="addRecommend">
+			<result name="error">/login.jsp</result>
+ 			<result name="success">/product/recommend.jsp</result>
+		</action>
+		<!-- 修改服务推荐 -->
+		<action name="editRecommend" class="org.jsyuger.web.action.ServiceRecommendAction" method="editRecommend">
+			<result name="error">/login.jsp</result>
+ 			<result name="success">/product/recommend.jsp</result>
+		</action>
+		<!-- 删除服务推荐 -->
+		<action name="deleteRecommend" class="org.jsyuger.web.action.ServiceRecommendAction" method="deleteRecommend">
+			<result name="error">/login.jsp</result>
+ 			<result name="success">/product/recommend.jsp</result>
+		</action>
+		
+		<!-- =================产品服务列表=================== -->
+		<!-- 显示服务推荐 -->
+		<action name="dyeHair" class="org.jsyuger.web.action.ServiceItemAction" method="showOneKind">
+ 			<result name="success">/product/dyeHair.jsp</result>
+		</action>
+		<action name="permHair" class="org.jsyuger.web.action.ServiceItemAction" method="showOneKind">
+ 			<result name="success">/product/permHair.jsp</result>
+		</action>
+		<action name="protectHair" class="org.jsyuger.web.action.ServiceItemAction" method="showOneKind">
+ 			<result name="success">/product/protectHair.jsp</result>
+		</action>
+		<action name="cutHair" class="org.jsyuger.web.action.ServiceItemAction" method="showOneKind">
+ 			<result name="success">/product/cutHair.jsp</result>
+		</action>
+		<!-- 添加服务 -->
+		<action name="addDyeHair" class="org.jsyuger.web.action.ServiceItemAction" method="addServiceItem">
+ 			<result name="success">/product/dyeHair.jsp</result>
+		</action>
+		<action name="addPermHair" class="org.jsyuger.web.action.ServiceItemAction" method="addServiceItem">
+ 			<result name="success">/product/permHair.jsp</result>
+		</action>
+		<action name="addProtectHair" class="org.jsyuger.web.action.ServiceItemAction" method="addServiceItem">
+ 			<result name="success">/product/protectHair.jsp</result>
+		</action>
+		<action name="addCutHair" class="org.jsyuger.web.action.ServiceItemAction" method="addServiceItem">
+ 			<result name="success">/product/cutHair.jsp</result>
+		</action>
+		<!-- 删除服务 -->
+		<action name="deleteDyeHair" class="org.jsyuger.web.action.ServiceItemAction" method="deleteServiceItem">
+ 			<result name="success">/product/dyeHair.jsp</result>
+		</action>
+		<action name="deletePermHair" class="org.jsyuger.web.action.ServiceItemAction" method="deleteServiceItem">
+ 			<result name="success">/product/permHair.jsp</result>
+		</action>
+		<action name="deleteProtectHair" class="org.jsyuger.web.action.ServiceItemAction" method="deleteServiceItem">
+ 			<result name="success">/product/protectHair.jsp</result>
+		</action>
+		<action name="deleteCutHair" class="org.jsyuger.web.action.ServiceItemAction" method="deleteServiceItem">
+ 			<result name="success">/product/cutHair.jsp</result>
+		</action>
+		<!-- 编辑服务 -->
+		<action name="editDyeHair" class="org.jsyuger.web.action.ServiceItemAction" method="editServiceItem">
+ 			<result name="success">/product/dyeHair.jsp</result>
+		</action>
+		<action name="editPermHair" class="org.jsyuger.web.action.ServiceItemAction" method="editServiceItem">
+ 			<result name="success">/product/permHair.jsp</result>
+		</action>
+		<action name="editProtectHair" class="org.jsyuger.web.action.ServiceItemAction" method="editServiceItem">
+ 			<result name="success">/product/protectHair.jsp</result>
+		</action>
+		<action name="editCutHair" class="org.jsyuger.web.action.ServiceItemAction" method="editServiceItem">
+ 			<result name="success">/product/cutHair.jsp</result>
+		</action>
+
+ 	</package>
+</struts>
